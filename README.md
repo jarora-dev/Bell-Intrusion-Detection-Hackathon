@@ -1,2 +1,3 @@
 # Bell-Intrusion-Detection-Hackathon
-For Bell Geekfest Hacathon 2023
+
+For Bell Geekfest Hackathon 2023

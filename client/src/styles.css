@@ -1,0 +1,109 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px;
+}
+
+.table-container {
+  width: 80%;
+  margin: 60px auto; /* This centers the table container horizontally */
+}
+
+th,
+td {
+  border: 1px solid #d4d4d4;
+  padding: 10px;
+  text-align: left;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #e6e6e6;
+}
+
+tr[style*="red"] {
+  background-color: red !important;
+}
+
+tr[style*="red"]:hover {
+  background-color: darkred !important;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.threat-level,
+.requests,
+.false-positives,
+.false-negatives {
+  padding: 20px;
+  border: 1px solid #d4d4d4;
+  border-radius: 5px;
+}
+
+.progress-bar {
+  background-color: #4caf50;
+  height: 30px;
+  line-height: 30px;
+  color: white;
+  text-align: center;
+}
+
+.requests {
+  position: relative;
+}
+
+.center-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.dashboard {
+  width: 200%;
+}
+
+.dashboard .main-indicators {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+.other-indicators {
+  display: flex;
+  justify-content: space-between; /* Separates the two child divs */
+  align-items: center;
+}
+
+.false-positives,
+.false-negatives {
+  flex: 1; /* Each div will take up an equal amount of space */
+  text-align: center; /* Centers the text within each div */
+  margin: 5px 20px; /* Add some padding for spacing */
+}
+
+.threat-level {
+  padding: 30px;
+}
+.threat-level,
+.blocked-ratio {
+  text-align: center;
+  padding: 20px;
+  border: 1px solid #ddd;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.big-number {
+  font-size: 2em;
+  font-weight: bold;
+}
