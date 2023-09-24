@@ -13,9 +13,10 @@ def on_connect():
                 "protocol": "UDP",
                 "serviceState": "Inactive",
                 "sourcePackets": 3,
-                "sourceBytes": 500,
+                "sourceBytes": 700,
             },
-        "requestBlocked" : "true"
+        "requestBlocked" : True,
+        "requestMalicious" : False
 
     }
     sio.emit('send-data', payload)

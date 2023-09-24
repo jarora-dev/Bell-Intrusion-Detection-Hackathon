@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 function Dashboard({
   threatLevel,
@@ -7,12 +7,6 @@ function Dashboard({
   falsePositives,
   falseNegatives,
 }) {
-  const [threatLevelState, setThreatLevel] = useState(threatLevel);
-  const [totalBlockedState, setTotalBlocked] = useState(totalBlocked);
-  const [totalReceivedState, setTotalReceived] = useState(totalReceived);
-  const [falsePositivesState, setFalsePositives] = useState(falsePositives);
-  const [falseNegativesState, setFalseNegatives] = useState(falseNegatives);
-
   return (
     <>
       <div className="dashboard">
@@ -21,7 +15,7 @@ function Dashboard({
           <div
             className="threat-level"
             style={{
-              backgroundColor: threatLevelColors[threatLevelState],
+              backgroundColor: threatLevelColors[threatLevel],
               flex: 1,
               fontSize: "1.5rem",
             }}
@@ -29,8 +23,8 @@ function Dashboard({
             Current Threat Level: {threatLevel}
           </div>
           <div className="blocked-ratio" style={{ flex: 1 }}>
-            <span className="big-number">{totalBlockedState}/</span>
-            <span className="big-number">{totalReceivedState}</span>
+            <span className="big-number">{totalBlocked}/</span>
+            <span className="big-number">{totalReceived}</span>
             <div>Requests Blocked</div>
           </div>
         </div>
@@ -39,12 +33,8 @@ function Dashboard({
       </div>
 
       <div className="other-indicators">
-        <div className="false-positives">
-          False Positives: {falsePositivesState}
-        </div>
-        <div className="false-negatives">
-          False Negatives: {falseNegativesState}
-        </div>
+        <div className="false-positives">False Positives: {falsePositives}</div>
+        <div className="false-negatives">False Negatives: {falseNegatives}</div>
       </div>
     </>
   );

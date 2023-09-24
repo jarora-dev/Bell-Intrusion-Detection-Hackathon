@@ -12,10 +12,32 @@ function App() {
   const [data, setData] = useState([]);
   const [totalReceived, setTotalReceived] = useState(0);
   const [totalBlocked, setTotalBlocked] = useState(0);
+  const [threatLevel, setThreatLevel] = useState("");
+  const [falsePositives, setFalsePositives] = useState(0);
+  const [falseNegatives, setFalseNegatives] = useState(0);
 
   useEffect(() => {
     setTotalReceived(data.length);
     setTotalBlocked(data.filter((row) => row.requestBlocked).length);
+    //Set threat level to high if more than 50% of requests are blocked from the last 100 requests
+    if (totalBlocked / totalReceived > 0.5) {
+      setThreatLevel("High");
+    }
+    //Set threat level to medium if more than 25% of requests are blocked from the last 100 requests
+    else if (totalBlocked / totalReceived > 0.25) {
+      setThreatLevel("Medium");
+    }
+    //Set threat level to low if less than 25% of requests are blocked from the last 100 requests
+    else {
+      setThreatLevel("Low");
+    }
+    // Set False Positives and False Negatives
+    setFalsePositives(
+      data.filter((row) => row.requestBlocked && !row.requestMalicious).length
+    );
+    setFalseNegatives(
+      data.filter((row) => !row.requestBlocked && row.requestMalicious).length
+    );
   }, [data]);
 
   useEffect(() => {
@@ -43,11 +65,11 @@ function App() {
       <Header />
 
       <Dashboard
-        threatLevel="Medium"
+        threatLevel={threatLevel}
         totalBlocked={totalBlocked}
         totalReceived={totalReceived}
-        falsePositives={10}
-        falseNegatives={5}
+        falsePositives={falsePositives}
+        falseNegatives={falseNegatives}
       />
       {/* <h1>{data.sNo}</h1> */}
       <Table data={data} />

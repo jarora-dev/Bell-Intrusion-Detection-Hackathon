@@ -13,6 +13,7 @@ function Table({ data }) {
             <th>Source Packets</th>
             <th>Source Bytes</th>
             <th>Request Blocked?</th>
+            <th>Request Malicious?</th>
           </tr>
         </thead>
         <tbody>
@@ -28,6 +29,7 @@ function Table({ data }) {
               <td>{row.requestData.sourcePackets}</td>
               <td>{row.requestData.sourceBytes}</td>
               <td>{row.requestBlocked ? "Yes" : "No"}</td>
+              <td>{row.requestMalicious ? "Yes" : "No"}</td>
             </tr>
           ))}
         </tbody>
