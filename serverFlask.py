@@ -44,7 +44,18 @@ def run_sniff():
     sniff_thread.start()
 
 
-def malicious_request_detected(srcip, dstip, sport, dport, proto, service, sbytes, sttl, dttl):
+def malicious_request_detected(srcip=None, dstip=None, sport=None, dport=None, proto=None, service=None, sbytes=None, sttl=None, dttl=None):
+    
+    srcip = srcip or request.args.get('srcip')
+    dstip = dstip or request.args.get('dstip')
+    sport = sport or int(request.args.get('sport', 0))
+    dport = dport or int(request.args.get('dport', 0))
+    proto = proto or request.args.get('proto')
+    service = service or request.args.get('service')
+    sbytes = sbytes or int(request.args.get('sbytes', 0))
+    sttl = sttl or int(request.args.get('sttl', 0))
+    dttl = dttl or int(request.args.get('dttl', 0))
+    
     ml_endpoint = "https://ec2-3-95-189-216.compute-1.amazonaws.com/predict/"
     
     req_data = {
@@ -64,11 +75,11 @@ def malicious_request_detected(srcip, dstip, sport, dport, proto, service, sbyte
 
 @app.route('/')
 def serve_file():
-    if malicious_request_detected("some_srcip", "some_dstip", 80, 80, "TCP", "HTTP", 100, 64, 64):
-        return send_from_directory(directory="path_to_directory", filename="file2.txt")
+    if malicious_request_detected():
+        return send_from_directory(directory="dummy", filename="secret.txt")
     else:
-        return send_from_directory(directory="path_to_directory", filename="file1.txt")
+        return send_from_directory(directory="real", filename="secret.txt")
 
 if __name__ == '__main__':
     run_sniff()  
-    app.run("Server Running and sniffing packets",host='0.0.0.0', port=8080)
+    app.run(host='0.0.0.0', port=8080)
